@@ -9,17 +9,6 @@ Import the package as follows:
 ```shell
 $ brane import sasjaderuijter/create_prediction
 ```
-## Running package in JupyterLab
-Import the package using BraneScript in a JupyterLab notebook.
-```shell
-import create_prediction;
-```
-Run a regression model on a trainingset, using the example dataset _titanic_trainset.csv_
-```shell
-run_regression("/data/titanic_trainset");
-```
 
-Run a random forest model on a trainingset, using the example dataset _titanic_trainset.csv_
-```shell
-run_random_forest("/data/titanic_trainset");
-```
+For examples on how to run the functions in BraneScript, see the comprehensive GitHub repository **Group12_WSCBS**:
+https://github.com/sasjaderuijter/Group12_WSCBS
