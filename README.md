@@ -9,7 +9,11 @@ Import the package as follows:
 ```shell
 $ brane import sasjaderuijter/create_prediction
 ```
-## Running package
+## Running package in JupyterLab
+Import the package using BraneScript in a JupyterLab notebook.
+```shell
+import create_prediction;
+```
 Run a regression model on a trainingset, using the example dataset _titanic_trainset.csv_
 ```shell
 run_regression("/data/titanic_trainset");
