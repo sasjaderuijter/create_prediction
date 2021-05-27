@@ -1,0 +1,42 @@
+name: create_prediction
+version: 1.0.0
+kind: compute
+
+dependencies:
+  - python3
+  - python3-yaml
+  - python3-pip
+
+files:
+  - create_prediction.py
+
+install:
+  - pip3 install scikit-learn
+  - pip3 install numpy
+  - pip3 install pandas
+
+entrypoint:
+  kind: task
+  exec: create_prediction.py
+
+actions:
+  'run_regression': 
+    command:
+      args:
+        - run_regression
+    input:
+      - type: string
+        name: input
+    output:
+      - type: string
+        name: output
+  'run_random_forest':
+    command:
+      args:
+        - run_random_forest
+    input:
+      - type: string
+        name: output
+    output:
+      - type: string
+        name: output
