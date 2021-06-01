@@ -13,14 +13,17 @@ def run_random_forest(input_data: str) -> str:
     # First read in the data
     data = pd.read_csv(f'{input_data}.csv', sep=';')
 
+    # Rename Columns (1-3 for Explanatory Variables, 4 for Dependent Variable)
+    data.columns = ['1', '2', '3', '4']
+
     # Create training/testing split (90/10)
     training_data, testing_data = train_test_split(data, test_size=0.1)
 
     # Separate the independent and dependent variables
-    y_training_data = training_data['Survived']
-    y_testing_data = testing_data['Survived']
-    x_training_data = training_data.drop(axis=1, columns=['Survived'])
-    x_testing_data = testing_data.drop(axis=1, columns=['Survived'])
+    y_training_data = training_data['4']
+    y_testing_data = testing_data['4']
+    x_training_data = training_data.drop(axis=1, columns=['4'])
+    x_testing_data = testing_data.drop(axis=1, columns=['4'])
 
     clf = RandomForestClassifier(n_estimators=10)
     # Fit to the training data
@@ -32,10 +35,10 @@ def run_random_forest(input_data: str) -> str:
     # Reset the index of the y_testing_data
     y_testing_data = y_testing_data.reset_index(drop=True)
     regression_results = pd.concat([prediction, y_testing_data], axis=1).rename(
-        columns={0: 'Prediction', 'Survived': 'Actual'})
+        columns={0: 'Prediction', '4': 'Actual'})
 
     # Then write the results data to a csv
-    OUTPUT_LOCATION = '/data/random_forest_results.csv'
+    OUTPUT_LOCATION = 'random_forest_results.csv'
     regression_results.to_csv(OUTPUT_LOCATION, sep=';', index=False)
 
     return OUTPUT_LOCATION
@@ -46,15 +49,18 @@ def run_regression(input_data: str) -> str:
     # First read in the data
     data = pd.read_csv(f'{input_data}.csv', sep=';')
 
+    # Rename Columns (1-3 for Explanatory Variables, 4 for Dependent Variable)
+    data.columns = ['1', '2', '3', '4']
+
     # Run regression and format results
         # Create training/testing split (90/10)
     training_data, testing_data = train_test_split(data, test_size=0.1)
 
     # Separate the independent and dependent variables
-    y_training_data = training_data['Survived']
-    y_testing_data = testing_data['Survived']
-    x_training_data = training_data.drop(axis=1, columns=['Survived'])
-    x_testing_data = testing_data.drop(axis=1, columns=['Survived'])
+    y_training_data = training_data['4']
+    y_testing_data = testing_data['4']
+    x_training_data = training_data.drop(axis=1, columns=['4'])
+    x_testing_data = testing_data.drop(axis=1, columns=['4'])
 
     # Create Regression Object
     # Fit to training data
@@ -67,10 +73,10 @@ def run_regression(input_data: str) -> str:
     # Reset the index of the y_testing_data
     y_testing_data = y_testing_data.reset_index(drop=True)
     regression_results = pd.concat([prediction, y_testing_data], axis=1).rename(
-        columns={0: 'Prediction', 'Survived': 'Actual'})
+        columns={0: 'Prediction', '4': 'Actual'})
 
     # Then write the results data to a csv
-    OUTPUT_LOCATION = '/data/regression_results.csv'
+    OUTPUT_LOCATION = 'regression_results.csv'
     regression_results.to_csv(OUTPUT_LOCATION, sep=';', index=False)
 
     return OUTPUT_LOCATION
